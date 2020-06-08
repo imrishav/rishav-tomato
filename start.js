@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 // // Make sure we are running node 7.6+
 // const [major, minor] = process.versions.node.split('.').map(parseFloat);
@@ -8,29 +8,30 @@ const mongoose = require('mongoose');
 // }
 
 // import environmental variables from our variables.env file
-require('dotenv').config({ path: 'variables.env' });
+require("dotenv").config({ path: "variables.env" });
 
 // Connect to our Database and handle any bad connections
 mongoose.connect(process.env.DATABASE);
 mongoose.Promise = global.Promise; // Tell Mongoose to use ES6 promises
-mongoose.connection.on('error', (err) => {
+mongoose.connection.on("error", (err) => {
   console.error(`🙅 🚫 🙅 🚫 🙅 🚫 🙅 🚫 → ${err.message}`);
 });
 
 // READY?! Let's go!
 
 //Importing all the models
-require('./models/Store');
-require('./models/User');
-require('./models/Review');
-
+require("./models/Store");
+require("./models/User");
+require("./models/Review");
 
 // Start our app!
-const app = require('./app');
-app.set('port', process.env.PORT || 7777);
-const server = app.listen(app.get('port'), () => {
+const app = require("./app");
+app.set("port", process.env.PORT || 7777);
+const server = app.listen(app.get("port"), () => {
   console.log(`Express running → PORT ${server.address().port}`);
 });
+
+module.exports = server;
 
 // //Temp send email
 // require('./handlers/mail');
